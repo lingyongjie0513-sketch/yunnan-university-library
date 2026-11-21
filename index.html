@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="查找云南大学研究生手册、校史读本和校规校纪题库。按标题和关键词搜索，按资料类型筛选，免登录在线阅读。">
+  <meta name="theme-color" content="#12283d">
+  <title>云南大学资料库</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./library.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#catalog">跳到资料目录</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="./" aria-label="云南大学资料库首页">
+        <span class="brand-mark" aria-hidden="true"><span class="icon icon-book"></span></span>
+        <span>云南大学资料库</span>
+      </a>
+      <nav aria-label="站点导航"><a class="nav-link" href="#catalog">资料目录</a></nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-content">
+        <div class="hero-rule" aria-hidden="true"></div>
+        <h1 id="page-title">云南大学资料库</h1>
+        <p>查阅研究生手册、校史读本和校规校纪题库。</p>
+        <form class="search" id="search-form" role="search" aria-label="搜索资料">
+          <label class="visually-hidden" for="query">搜索标题或关键词</label>
+          <span class="icon icon-search" aria-hidden="true"></span>
+          <input type="search" id="query" name="q" placeholder="搜索标题或关键词" autocomplete="off" enterkeyhint="search" maxlength="120">
+          <button class="clear-search" id="clear-search" type="button" aria-label="清空搜索" hidden>×</button>
+          <button class="search-submit" type="submit">搜索</button>
+        </form>
+        <div class="suggestions" aria-label="常用关键词">
+          <span>试试搜索</span>
+          <button type="button" data-query="学籍">学籍</button>
+          <button type="button" data-query="校规校纪">校规校纪</button>
+          <button type="button" data-query="东陆大学">东陆大学</button>
+        </div>
+      </div>
+      <a class="photo-credit" href="./files/yunnan-university-history-2022.pdf#page=6">东陆大学校门旧影 · 校史简明读本</a>
+    </section>
+
+    <section id="catalog" class="catalog" aria-labelledby="catalog-title">
+      <div class="catalog-title">
+        <h2 id="catalog-title" tabindex="-1">资料目录</h2>
+        <p id="results-count" role="status" aria-live="polite">共 4 份资料</p>
+      </div>
+
+      <div class="catalog-layout">
+        <aside class="filters" aria-labelledby="filter-title">
+          <h3 id="filter-title">资料类型</h3>
+          <div class="filter-options" role="group" aria-labelledby="filter-title">
+            <button class="filter" type="button" data-type="all" aria-pressed="true"><span class="icon icon-grid" aria-hidden="true"></span><span>全部资料</span><span class="filter-count" aria-hidden="true">4</span></button>
+            <button class="filter" type="button" data-type="handbook" aria-pressed="false"><span class="icon icon-file" aria-hidden="true"></span><span>研究生手册</span><span class="filter-count" aria-hidden="true">1</span></button>
+            <button class="filter" type="button" data-type="questions" aria-pressed="false"><span class="icon icon-list" aria-hidden="true"></span><span>校规校纪题库</span><span class="filter-count" aria-hidden="true">2</span></button>
+            <button class="filter" type="button" data-type="history" aria-pressed="false"><span class="icon icon-book" aria-hidden="true"></span><span>校史读本</span><span class="filter-count" aria-hidden="true">1</span></button>
+          </div>
+        </aside>
+
+        <div class="resources" id="resources">
+          <article class="resource handbook" data-category="handbook" data-keywords="研究生院 学籍管理 学籍异动 学术道德 学生管理 研究生培养 培养 学位授予 学位论文 开题 答辩 课程 英语免修 毕业 国际交流 2025 研究生手册 上册 PDF">
+            <div class="resource-top">
+              <span class="resource-icon" aria-hidden="true"><span class="icon icon-file"></span></span>
+              <div class="metadata"><span class="kind">研究生手册</span><span>PDF<span class="metadata-separator">·</span>186 页</span></div>
+            </div>
+            <h3><a href="./files/graduate-handbook-2025.pdf">《研究生手册》上册（2025年）</a></h3>
+            <p>查阅研究生学籍管理、培养和学位授予等相关规定。</p>
+            <div class="resource-bottom">
+              <div class="tags" aria-label="关键词"><button type="button" data-query="学籍">学籍</button><button type="button" data-query="培养">培养</button><button type="button" data-query="学位">学位</button></div>
+              <a class="view-link" href="./files/graduate-handbook-2025.pdf" aria-label="查看研究生手册上册（2025年）">查看资料</a>
+            </div>
+          </article>
+
+          <article class="resource history" data-category="history" data-keywords="云南大学校史简明读本 正文 修订版 2022 校史 云大 东陆大学 国立云南大学 会泽院 发展历程 建校 PDF">
+            <div class="resource-top">
+              <span class="resource-icon" aria-hidden="true"><span class="icon icon-book"></span></span>
+              <div class="metadata"><span class="kind">校史读本</span><span>PDF<span class="metadata-separator">·</span>128 页</span></div>
+            </div>
+            <h3><a href="./files/yunnan-university-history-2022.pdf">云南大学校史简明读本（修订）</a></h3>
+            <p>了解从东陆大学创办到云南大学各时期的发展历程。</p>
+            <div class="resource-bottom">
+              <div class="tags" aria-label="关键词"><button type="button" data-query="校史">校史</button><button type="button" data-query="东陆大学">东陆大学</button></div>
+              <a class="view-link" href="./files/yunnan-university-history-2022.pdf" aria-label="查看云南大学校史简明读本">查看资料</a>
+            </div>
+          </article>
+
+          <article class="resource questions" data-category="questions" data-keywords="校纪 校规 题库 练习 337页 337 页 单选题 多选题 纪律处分 校史 校情 学籍 学位 DOCX Word">
+            <div class="resource-top">
+              <span class="resource-icon" aria-hidden="true"><span class="icon icon-list"></span></span>
+              <div class="metadata"><span class="kind">校规校纪题库</span><span>Word<span class="metadata-separator">·</span>网页可读</span></div>
+            </div>
+            <h3><a href="./read/questions-337.html">校规校纪题库（337页）</a></h3>
+            <p>涵盖学生管理、纪律处分和学校历史等主题，原题附参考答案。</p>
+            <div class="resource-bottom">
+              <div class="tags" aria-label="关键词"><button type="button" data-query="校规校纪">校规校纪</button><button type="button" data-query="纪律处分">纪律处分</button></div>
+              <a class="view-link" href="./read/questions-337.html" aria-label="查看校规校纪题库337页">查看资料</a>
+            </div>
+          </article>
+
+          <article class="resource questions" data-category="questions" data-keywords="校纪 校规 题库 练习 445页 445 页 单选题 多选题 纪律处分 校史 校情 学籍 学位 DOCX Word">
+            <div class="resource-top">
+              <span class="resource-icon" aria-hidden="true"><span class="icon icon-list"></span></span>
+              <div class="metadata"><span class="kind">校规校纪题库</span><span>Word<span class="metadata-separator">·</span>网页可读</span></div>
+            </div>
+            <h3><a href="./read/questions-445.html">校规校纪题库（445页）</a></h3>
+            <p>收录关于校纪、研究生培养和云大校史的练习题与参考答案。</p>
+            <div class="resource-bottom">
+              <div class="tags" aria-label="关键词"><button type="button" data-query="校规校纪">校规校纪</button><button type="button" data-query="研究生培养">研究生培养</button></div>
+              <a class="view-link" href="./read/questions-445.html" aria-label="查看校规校纪题库445页">查看资料</a>
+            </div>
+          </article>
+
+          <div class="empty" id="empty" hidden>
+            <span class="resource-icon" aria-hidden="true"><span class="icon icon-search"></span></span>
+            <h3>没有找到匹配的资料</h3>
+            <p>可以试试其他关键词，或切换资料类型。</p>
+            <button class="view-link" id="reset" type="button">查看全部资料</button>
+          </div>
+        </div>
+      </div>
+      <noscript><p>请启用 JavaScript 使用目录搜索和类型筛选。仍可通过资料链接打开文件。</p></noscript>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <span>云南大学资料库</span>
+      <span>资料来自本次提供的文件，供学习查阅。</span>
+    </div>
+  </footer>
+</body>
+</html>
