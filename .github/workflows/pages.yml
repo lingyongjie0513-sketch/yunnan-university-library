@@ -1,0 +1,73 @@
+name: Deploy library to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Assemble and verify the static library
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site/{assets,files,read}
+          cp index.html library.js styles.css _site/
+          origin='https://yunnan-university-library.lingyongjie0513.chatgpt.site'
+          curl --proto '=https' --proto-redir '=https' --fail --silent --show-error --location --max-redirs 2 --retry 2 --max-time 30 "$origin/assets/campus-history.webp" --output '_site/assets/campus-history.webp'
+          curl --proto '=https' --proto-redir '=https' --fail --silent --show-error --location --max-redirs 2 --retry 2 --max-time 30 "$origin/assets/questions-445-image1.jpeg" --output '_site/assets/questions-445-image1.jpeg'
+          curl --proto '=https' --proto-redir '=https' --fail --silent --show-error --location --max-redirs 2 --retry 2 --max-time 30 "$origin/assets/questions-445-image2.jpeg" --output '_site/assets/questions-445-image2.jpeg'
+          curl --proto '=https' --proto-redir '=https' --fail --silent --show-error --location --max-redirs 2 --retry 2 --max-time 30 "$origin/files/graduate-handbook-2025.pdf" --output '_site/files/graduate-handbook-2025.pdf'
+          curl --proto '=https' --proto-redir '=https' --fail --silent --show-error --location --max-redirs 2 --retry 2 --max-time 30 "$origin/files/questions-337.docx" --output '_site/files/questions-337.docx'
+          curl --proto '=https' --proto-redir '=https' --fail --silent --show-error --location --max-redirs 2 --retry 2 --max-time 30 "$origin/files/questions-445.docx" --output '_site/files/questions-445.docx'
+          curl --proto '=https' --proto-redir '=https' --fail --silent --show-error --location --max-redirs 2 --retry 2 --max-time 30 "$origin/files/yunnan-university-history-2022.pdf" --output '_site/files/yunnan-university-history-2022.pdf'
+          curl --proto '=https' --proto-redir '=https' --fail --silent --show-error --location --max-redirs 2 --retry 2 --max-time 30 "$origin/read/questions-337.html" --output '_site/read/questions-337.html'
+          curl --proto '=https' --proto-redir '=https' --fail --silent --show-error --location --max-redirs 2 --retry 2 --max-time 30 "$origin/read/questions-445.html" --output '_site/read/questions-445.html'
+          python3 - <<'PY'
+          from pathlib import Path
+          for reader in Path('_site/read').glob('*.html'):
+              # The published source may append its CDN script to an HTML response.
+              data = reader.read_bytes()
+              marker = b'\n<script>(function(){function c(){var b=a.contentDocument'
+              start = data.rfind(marker)
+              end = data.rfind(b'</script></body>\n</html>\n')
+              if 0 <= start < end and b'window.__CF$cv$params' in data[start:end]:
+                  reader.write_bytes(data[:start] + b'\n</body>\n</html>\n')
+          PY
+          cd _site
+          sha256sum --check <<'CHECKSUMS'
+          2bf6cd08403e3c735ed26cef5f342ace51861f65d938489117fca06bcb43e70e  assets/campus-history.webp
+          e56d7caebfcb100cba9e56f3965e2f563005c40d5f005d2828ab435db8f06a4a  assets/questions-445-image1.jpeg
+          a39e4e17e3ed72c205c921c358b83019a76b4de978a2548821460a36097283c7  assets/questions-445-image2.jpeg
+          2e6726260c272153372248eeffcecd9da95df7ae1a6504b8f909980cdd7feb4b  files/graduate-handbook-2025.pdf
+          7d44d144abd8bc031003e2cf7e72213e1792bdc1b08444ad9b1ae9f47d9985a6  files/questions-337.docx
+          789851b328e58a00ee178a0be6ced01bae0ba2b8e0b19f336fa7c14c4730c5a7  files/questions-445.docx
+          d355ac3499128ef234b237ffddb9801c9145fa341a6fcec60b93fb61e4a03214  files/yunnan-university-history-2022.pdf
+          690d8377571785c3b3257fe7f22eb8c798732ccad4118d1b16dd7441fa7577d4  read/questions-337.html
+          5f542e0656515889a73d19b7f444cef1255ae13fbd4148ac9e2de6a098961302  read/questions-445.html
+          CHECKSUMS
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
